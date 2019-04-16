@@ -94,4 +94,4 @@
 Паник селл/Закрытие сигнала
 
 По всем вопросам t.me/dobrijvecher
-[Telegram] (t.me/dobriyvecher)
+[Telegram] (http://t.me/dobriyvecher)
