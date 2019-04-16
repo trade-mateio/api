@@ -1,78 +1,95 @@
 trade-mate.io api version boilerplate
 
-###ДОСТУП
+### ДОСТУП
 На сайте в личном кабинете вы получаете:
-key который является конкатенацией режима работа канала (test|prod) и id канала
+key который является конкатенацией режима работы канала (test|prod) и id канала
 secret, который можно сгенерировать по кнопке
 
-###HEADERS
+### HEADERS
 nonce : <number> Последовательно увеличиваемое значение
 authKey : <string> Ваш ключ
 authSignature : <string> Вычисляемая строка
 
-###ПОЛУЧЕНИЕ authSignature
-1. Гет параметры сортируем по алфавиту
-2. Джоиним их через ":" 
-3.1 Если есть body в POST/PATCH запросах то так же через ":" добавляем стрингифаеный body и после него ":"
-3.2 Если body - нет, то просто будет "::"
-4. Далее добавляем ваш secret
-5. Шифруем это с sha256 и берем "base64"-шный digest
+### ПОЛУЧЕНИЕ authSignature
+1. Гет параметры сортируем по алфавиту, и join'им их через ":"
+3. Если есть body в POST/PATCH запросах то так же через ":" добавляем stringify(body) и после него ":"
+4. Если body - нет, то просто будет "::"
+5. Добавляем ваш secret
+6. Шифруем это с sha256 и берем base64'шный digest
 
-###ПРИМЕР
-queryParams { nonce: 14892427427, a: 1, b: 2 }
-body { some_body: '2love' }
-Результирующая строка с body -   a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==
-Результирующая строка без body - a:1:b:2:nonce:14892427427::rSfSzzNA97nNJSgc0aToSw==
-И далее шифруем с sha256 секретом и берем с этого digest в base64
+### ПРИМЕР
+1. queryParams { nonce: 14892427427, a: 1, b: 2 }
+2. body { some_body: '2love' }
+3. Результирующая строка с body -   
+`a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==`
+4. Результирующая строка без body - 
+`a:1:b:2:nonce:14892427427::rSfSzzNA97nNJSgc0aToSw==`
+5. И далее шифруем с sha256 секретом и берем с этого digest в base64
 
-###Имеющиеся запросы
+### Имеющиеся запросы соответствуют методам в примере:
 
-1. getStats()
-Получаем статистические данные
-
-
-2. getExchanges()
-Получаем список доступных для создания сигналов бирж
+# 1. getStats()
+Получение статистических данных
 
 
-3. getSymbols()
-Получаем список символов с которыми можно сделать сигнал
-Использования этого запроса необходимо для матчинга symbolId для создания сигнала
+# 2. getExchanges()
+Получение списка доступных бирж
 
 
-4. getSignals()
-Получаем список наших текущих сигналов
+# 3. getSymbols()
+Получение списка символов и их symbolId, для дальнейшего создания сигнала.
 
 
-5. getSignal(signalId)
-Получаем сигнал по signalId
+# 4. getSignals()
+Получение списка текущих сигналов
+
+Доступные фильтры в query:
+* `active<bool>`
+* `bought<bool>`
+* `performance<str>, валидные значения : 'gain', 'loss'`
+* `currency<bool>`
+* `baseCurrency<str>`
+* `exchangeId<id>`
 
 
-6. makeSignal()
+# 5. getSignal(signalId)
+Получение сигнал по `signalId`
+
+
+# 6. makeSignal()
 Создание сигнала
 Пример запроса можно посмотреть в примере вызова, сейчас детали:
-Сигнал состоит из actions, эти действия имеют семантику buys, takeProfits, stopLoss
-buys и takeProfits это hashMap, где key это генерируемый вами id action'а, а value сам обьект action
-В зависимости от action.type принимаются следующие необходимые поля:
+
+> Сигнал состоит из `actions`, эти действия имеют семантику `buys`, `takeProfits`, `stopLoss`.
+
+* `buys<hashMap>`
+* `takeProfits<hashMap>`
+* `stopLoss<action>`, тк он единственен в рамках сигнала,
+* где:
+* * `key` это генерируемый вами id `action`'а, 
+* * `value` сам обьект `action`.
+* * * id - уникальный ключ в пределах действий сигнала
+
+## В зависимости от того, в каком из ключей лежит `action` принимаются следующие необходимые поля:
 
 Для buys
-type == Buy => price, 
-type == BuyIfAbove => price, threshold
-type == BuyIfBelow => price, threshold
+* type == `Buy` => `price`,
+* type == `BuyIfAbove` => `price, threshold`
+* type == `BuyIfBelow` => `price, threshold`
 
 Для take profits
-type == TakeProfitSell => threshold
-type == TakeProfitTrailingSell => threshold, trailing (процент трейлинга в долях единицы, прим 3% => 0.03)
+* type == `TakeProfitSell` => `threshold`
+* type == `TakeProfitTrailingSell` => `threshold, trailing` (процент трейлинга в долях единицы, прим 3% => 0.03)
 
 Для stop loss
-type == StopLossSell => threshold
-type == StopLossTrailingSell => trailing (относительная разница уровня стоп лосс и текущей рыночной цены, долях единицы, положительное значение)
+* type == `StopLossSell` => `threshold`
+* type == `StopLossTrailingSell` => `trailing` (относительная разница уровня стоп лосс и текущей рыночной цены, долях единицы, положительное значение)
 
 
-7. updateSignal()
+# 7. updateSignal()
 Редактирование сигнала
 В buys, takeProfits, stopLoss надо передавать только то что подлежит изменению
 
 
-8. panicSellSignal()
+# 8. panicSellSignal()
 Паник селл/Закрытие сигнала
