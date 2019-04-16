@@ -86,8 +86,11 @@
 
 # 7. updateSignal()
 Редактирование сигнала
-В buys, takeProfits, stopLoss надо передавать только то что подлежит изменению
+
+В buys, `takeProfits`, `stopLoss` надо передавать только то что подлежит изменению
 
 
 # 8. panicSellSignal()
 Паник селл/Закрытие сигнала
+
+По всем вопросам t.me/dobriyvecher
