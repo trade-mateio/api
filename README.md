@@ -93,4 +93,5 @@
 # 8. panicSellSignal()
 Паник селл/Закрытие сигнала
 
-По всем вопросам t.me/dobriyvecher
+По всем вопросам t.me/dobrijvecher
+[Telegram] t.me/dobriyvecher
