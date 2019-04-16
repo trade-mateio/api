@@ -1,16 +1,16 @@
 trade-mate.io api version boilerplate
 
-ДОСТУП
+###ДОСТУП
 На сайте в личном кабинете вы получаете:
 key который является конкатенацией режима работа канала (test|prod) и id канала
 secret, который можно сгенерировать по кнопке
 
-HEADERS
+###HEADERS
 nonce : <number> Последовательно увеличиваемое значение
 authKey : <string> Ваш ключ
 authSignature : <string> Вычисляемая строка
 
-ПОЛУЧЕНИЕ authSignature
+###ПОЛУЧЕНИЕ authSignature
 1. Гет параметры сортируем по алфавиту
 2. Джоиним их через ":" 
 3.1 Если есть body в POST/PATCH запросах то так же через ":" добавляем стрингифаеный body и после него ":"
@@ -18,14 +18,14 @@ authSignature : <string> Вычисляемая строка
 4. Далее добавляем ваш secret
 5. Шифруем это с sha256 и берем "base64"-шный digest
 
-ПРИМЕР
+###ПРИМЕР
 queryParams { nonce: 14892427427, a: 1, b: 2 }
 body { some_body: '2love' }
 Результирующая строка с body -   a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==
 Результирующая строка без body - a:1:b:2:nonce:14892427427::rSfSzzNA97nNJSgc0aToSw==
 И далее шифруем с sha256 секретом и берем с этого digest в base64
 
-Имеющиеся запросы
+###Имеющиеся запросы
 
 1. getStats()
 Получаем статистические данные
