@@ -1,13 +1,12 @@
 var crypto = require('crypto');
 var request = require('request');
-var async = require('async');
 
-var URL = 'https://cryptex.alterspace.info/api/bot/v1';
+var URL = 'https://trade-mate.io/api/bot/v1';
 
-var key = 'prod156';
+var key = 'prod1234';
 var secret = 'L2ztJQOYE0rndyCINU6taw==';
 
-// var key = 'test156';
+// var key = 'test1234';
 // var secret = 'rSfSzzNA97nNJSgc0aToSw==';
 
 let tmApi = {
@@ -338,6 +337,5 @@ let tmApi = {
 // tmApi.api.getSymbols();
 // tmApi.api.panicSellSignal(431);
 // tmApi.api.getSignal(430);
-// tmApi.api.getSignal(434);
-tmApi.api.updateSignal(435);
+// tmApi.api.updateSignal(435);
 // tmApi.api.getStats();
