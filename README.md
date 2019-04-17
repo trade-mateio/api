@@ -55,7 +55,7 @@
 * `exchangeId<id>`
 
 
-# 5. getSignal(signalId)
+# 5. getSignal(`signalId`)
 Получение сигнал по `signalId`
 
 
@@ -89,13 +89,13 @@
 * type == `StopLossTrailingSell` => `trailing` (относительная разница уровня стоп лосс и текущей рыночной цены, долях единицы, положительное значение)
 
 
-# 7. updateSignal()
+# 7. updateSignal(`signalId`)
 Редактирование сигнала
 
 В buys, `takeProfits`, `stopLoss` надо передавать только то что подлежит изменению
 
 
-# 8. panicSellSignal()
+# 8. panicSellSignal(`signalId`)
 Паник селл/Закрытие сигнала
 
 По всем вопросам https://t.me/dobrijvecher
