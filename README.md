@@ -28,19 +28,19 @@
 
 # 1. getStats()
 Получение статистических данных
-* score
-* requestsPerMinute
-* requestsLastMinute
-* signalsPerDay
-* signalsLastDay
-* лимиты по каналу в разрезе exchanges и base_currencies
+* `score`
+* `requestsPerMinute`
+* `requestsLastMinute`
+* `signalsPerDay`
+* `signalsLastDay`
+* лимиты по каналу в разрезе `exchanges` и `base_currencies`
 
 # 2. getExchanges()
 Получение списка доступных бирж
 
 
 # 3. getSymbols()
-Получение списка символов и их symbolId, для дальнейшего создания сигнала.
+Получение списка символов и их `symbolId`, для дальнейшего создания сигнала.
 
 
 # 4. getSignals()
