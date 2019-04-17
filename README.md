@@ -28,7 +28,12 @@
 
 # 1. getStats()
 Получение статистических данных
-
+* score
+* requestsPerMinute
+* requestsLastMinute
+* signalsPerDay
+* signalsLastDay
+* лимиты по каналу в разрезе exchanges и base_currencies
 
 # 2. getExchanges()
 Получение списка доступных бирж
