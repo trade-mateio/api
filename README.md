@@ -64,8 +64,8 @@
 Пример запроса можно посмотреть в примере вызова, сейчас детали:
 
 > Обязательные поля в `action`:
-* `amount<number>|<str>`
-  * суммарный amount в `buys` должен быть равен суммарному `amount` в `takeProfits` и в `stopLoss`.
+* `amount<number>|<str>` - в долях 1
+  * суммарный amount в `buys` должен быть равен суммарному `amount` в `takeProfits` и в `stopLoss`,
 * `type<str>`
 
 > Сигнал состоит из `actions`, эти действия имеют семантику `buys`, `takeProfits`, `stopLoss`.
