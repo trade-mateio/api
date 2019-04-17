@@ -80,18 +80,28 @@
 
 ## В зависимости от того, в каком из ключей лежит `action` принимаются следующие необходимые поля:
 
+Общая концепция:
+* `price` - цена покупки/продажи, если указана то будет выставлен Лимитный ордер
+* `threshold` - цена активации `action`,
+  * для `buys` обязательно только при `type` == `BuyIfAbove` || `BuyIfBelow`
+  * для `takeProfits` и `stopLoss`, обязательно всегда
+* `trailing` - доступно только для `takeProfits` и `stopLoss`
+  * для `stopLoss` c `type == StopLossTrailingSell` это относительная разница уровня стоп лосс и текущей рыночной цены, в долях единицы, положительное значение
+  * для `takeProfits` с `type == TakeProfitTrailingSell` это процент трейлинга в долях единицы, 3% => 0.03 
+* `ladder` - доступно только для `stopLoss`, трейлинг лесенкой
+
 Для buys
-* type == `Buy` => `price`,
-* type == `BuyIfAbove` => `price, threshold`
-* type == `BuyIfBelow` => `price, threshold`
+* type == `Buy`
+* type == `BuyIfAbove`, обязательно `threshold`
+* type == `BuyIfBelow`, обязательно `threshold`
 
 Для take profits
-* type == `TakeProfitSell` => `threshold`
-* type == `TakeProfitTrailingSell` => `threshold, trailing` (процент трейлинга в долях единицы, прим 3% => 0.03)
+* type == `TakeProfitSell`, обязательно `threshold`
+* type == `TakeProfitTrailingSell`, обязательно `threshold, trailing`
 
 Для stop loss
-* type == `StopLossSell` => `threshold`
-* type == `StopLossTrailingSell` => `trailing` (относительная разница уровня стоп лосс и текущей рыночной цены, долях единицы, положительное значение)
+* type == `StopLossSell`, обязательно `threshold`
+* type == `StopLossTrailingSell`, обязательно `trailing`
 
 
 # 7. updateSignal(`signalId`)
