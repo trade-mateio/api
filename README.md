@@ -16,8 +16,8 @@
 6. Шифруем это с sha256 и берем base64'шный digest
 
 ### ПРИМЕР
-1. queryParams { nonce: 14892427427, a: 1, b: 2 }
-2. body { some_body: '2love' }
+1. queryParams `{ nonce: 14892427427, a: 1, b: 2 }`
+2. body `{ some_body: '2love' }`
 3. Результирующая строка с body -   
 `a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==`
 4. Результирующая строка без body - 
