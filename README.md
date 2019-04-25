@@ -1,44 +1,52 @@
+### API Documentation 
+
+> trade-mate.io cryptocurrency trading platform with autotrade and copytrade functions.
+
+![Imgur](https://i.imgur.com/Y334Jzp.png)
+
 ### ДОСТУП
-На сайте в личном кабинете вы получаете:
-* `key` - который является конкатенацией режима работы канала (test|prod) и id канала
-* `secret` - можно сгенерировать по кнопке в личном кабинете
+On the website in Trader's Cabinet you need to generate your secrets for two modes "test" and "prod":
+
+In test you can make integration works, and signals created in this mode wouldn't be available from other channe mode.
+* `key` - looks like <channel mode>(In lowercase) + <channel id> Ex: prod156
+* `secret` - Generate it in channel page
 
 ### QUERY 
-В query каждого запроса добавляется
-* `nonce : <number>` - Монотонно возрастающее значение
+Query of each request should have
+* `nonce : <number>` - monotonically increasing value. Ex: `+new Date()`
 
 ### HEADERS
-* `authKey : <string>` - Ваш ключ
-* `authSignature : <string>` - Вычисляемая строка
+* `authKey : <string>` - You key
+* `authSignature : <string>` - Calculated signature
 
-### ПОЛУЧЕНИЕ authSignature
-1. Гет параметры сортируем по алфавиту, и join'им их через ":"
-3. Если есть body в POST/PATCH запросах то так же через ":" добавляем stringify(body) и после него ":"
-4. Если body - нет, то просто будет "::"
-5. Добавляем ваш secret
-6. Шифруем это с sha256 и берем base64'шный digest
+### CALCULATE authSignature
+1. Query params sorted alphabetically, join keys and values via ":"
+3. If request has body in POST/PATCH request, then add it (stringify(body)) wrapped with ":"
+4. If request has not body - "::"
+5. Append secret
+6. Use sha256 for resulted string and calculate digest in base64
 
-### ПРИМЕР
+### EXAMPLE authSignature
 1. queryParams `{ nonce: 14892427427, a: 1, b: 2 }`
 2. body `{ some_body: '2love' }`
-3. Результирующая строка с body -   
+3. Resulted string with body -   
 `a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==`
-4. Результирующая строка без body - 
+4. Resulted string without body - 
 `a:1:b:2:nonce:14892427427::rSfSzzNA97nNJSgc0aToSw==`
-5. И далее шифруем с sha256 секретом и берем с этого digest в base64
+5. Use sha256 for resulted string and calculate digest in base64
 
-### Имеющиеся запросы соответствуют методам в примере:
+### Requests in documentation example:
 
 # 1. getStats()
-Получение статистических данных
-* `score` - суммарный скор канала, в отношении к другим
-* `requestsPerMinute` - лимит кол-ва запросов в минуту
-* `requestsLastMinute` - кол-во сделанных запросов в минуту
-* `signalsPerDay` - лимит кол-ва сигналов за день
-* `signalsLastDay` - кол-во сделанных сигналов за день
-* `maxActiveSignalsPerFeed` - максимальное кол-во активных сигналов по каналу
-* лимиты по каналу в разрезе `exchanges` и `base_currencies`, показан остаток лимита, где максимум это 1, что равно 100%, 0.4 в примере это 40% остатка
-  * В момент создания сигнала лимит по данной бирже и валютной паре уменьшается на величину обьема в сигнале, при закрытии сигнала - задействованный обьем в задаче возвращается в лимит.
+Get statistics info for channel
+* `score` - calculated score of the channel
+* `requestsPerMinute` - max requests limit per minute
+* `requestsLastMinute` - number of requests last minute
+* `signalsPerDay` - max signals per day
+* `signalsLastDay` - number of created signals last day
+* `maxActiveSignalsPerFeed` - max active signals per channel
+* channel limits `exchanges` и `base_currencies`, 1 means 100%.
+  * At the time the signal is created, the limit on this exchange and the base_currency is reduced by the amount of volume in the signal; when the signal is closed, the limit volume involved in the signal returns to the limit.
   ```javascript 
   {
       "exchanges":{
@@ -57,51 +65,51 @@
   ```
 
 # 2. getExchanges()
-Получение списка доступных бирж
+Get list of exchanges
 
 
 # 3. getSymbols()
-Получение списка символов и их `symbolId`, для дальнейшего создания сигнала.
+Get list of symbols and it's `symbolId`
 
 
 # 4. getSignals()
-Получение списка текущих сигналов
+Get channel signals
 
-Доступные фильтры в query:
+Available filters in query:
 * `active<bool>`
 * `bought<bool>`
-* `performance<str>, валидные значения : 'gain', 'loss'`
+* `performance<str>, valid values : 'gain', 'loss'`
 * `currency<bool>`
 * `baseCurrency<str>`
 * `exchangeId<id>`
 
 
 # 5. getSignal(`signalId`)
-Получение сигнала по `signalId`
+Get signal with `signalId`
 
-`signalId` Передается в `query`
+`signalId` in `query`
 
 
 # 6. makeSignal()
-Создание сигнала
-Пример запроса можно посмотреть в примере вызова, сейчас детали:
+Signal creation
+Request example into example file, here are details:
 
-> Обязательные поля в `action`:
-* `amount<number>|<str>` - в долях 1
-  * суммарный amount в `buys` должен быть равен суммарному `amount` в `takeProfits` и в `stopLoss`,
+> Mandatory fields in `action`:
+* `amount<number>|<str>` - 0 ~ 1
+  * summary amount of `buys` should be equal to summary `amount` в `takeProfits` и в `stopLoss`,
 * `type<str>`
 
-> Сигнал состоит из `actions`, эти действия имеют семантику `buys`, `takeProfits`, `stopLoss`.
+> Signal is consists of `actions`, this actions has semantics like `buys`, `takeProfits`, `stopLoss`.
 
-* `buys<hashMap>`
-* `takeProfits<hashMap>`
-* `stopLoss<action>`, тк он единственен в рамках сигнала,
-* где:
-  * `key` это генерируемый вами id `action`'а, 
-  * `value` сам обьект `action`.
-    * id - уникальный ключ в пределах действий сигнала
+* `buys<hashMap<id, action>>`
+* `takeProfits<hashMap<id, action>>`
+* `stopLoss<action>`,
+* where:
+  * `key` generated by you id `action`, 
+  * `value` - `action`.
+    * id - unique key in signal (can be monotonically increasing value) 
 
-## В зависимости от того, в каком из ключей лежит `action` принимаются следующие необходимые поля:
+## In case of what this `action` is, it has different values:
 
 Общая концепция:
 * `price` - цена покупки/продажи, если указана то будет выставлен Лимитный ордер
