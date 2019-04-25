@@ -45,7 +45,7 @@ Get statistics info for channel
 * `signalsPerDay` - max signals per day
 * `signalsLastDay` - number of created signals last day
 * `maxActiveSignalsPerFeed` - max active signals per channel
-* channel limits `exchanges` и `base_currencies`, 1 means 100%.
+* channel limits for `exchanges` and `base_currencies`. in limitRemaining field - 1 means 100%.
   * At the time the signal is created, the limit on this exchange and the base_currency is reduced by the amount of volume in the signal; when the signal is closed, the limit volume involved in the signal returns to the limit.
   ```javascript 
   {
