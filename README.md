@@ -8,7 +8,7 @@
 On the website in Trader's Cabinet you need to generate your secrets for two modes "test" and "prod":
 
 In test you can make integration works, and signals created in this mode wouldn't be available from other channe mode.
-* `key` - looks like <channel mode>(In lowercase) + <channel id> Ex: prod156
+* `key` - looks like `channel_mode`(In lowercase) + `channel_id` Ex: prod156
 * `secret` - Generate it in channel page
 
 ### QUERY 
