@@ -1,6 +1,6 @@
 ### API Documentation 
 
-> trade-mate.io cryptocurrency trading platform with autotrade and copytrade functions.
+> [trade-mate.io](https://trade-mate.io) cryptocurrency trading platform with autotrade and copytrade functions.
 
 ![Imgur](https://i.imgur.com/Y334Jzp.png)
 
