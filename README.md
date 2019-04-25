@@ -4,7 +4,7 @@
 
 ![Imgur](https://i.imgur.com/Y334Jzp.png)
 
-### ДОСТУП
+### KEYS
 On the website in Trader's Cabinet you need to generate your secrets for two modes "test" and "prod":
 
 In test you can make integration works, and signals created in this mode wouldn't be available from other channe mode.
