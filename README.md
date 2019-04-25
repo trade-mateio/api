@@ -111,34 +111,34 @@ Request example into example file, here are details:
 
 ## In case of what this `action` is, it has different values:
 
-Общая концепция:
-* `price` - цена покупки/продажи, если указана то будет выставлен Лимитный ордер
-* `threshold` - цена активации `action`, используется как стоп цена срабатывания `action` для выставления ордера (Стоп маркетные и стоп лимитные ордера)
-  * для `buys` обязательно только при `type` == `BuyIfAbove` || `BuyIfBelow`
-  * для `takeProfits` и `stopLoss`, обязательно всегда
-* `trailing` - доступно только для `takeProfits` и `stopLoss`
-  * для `stopLoss` c `type == StopLossTrailingSell` это относительная разница уровня стоп лосс и текущей рыночной цены, в долях единицы, положительное значение
-  * для `takeProfits` с `type == TakeProfitTrailingSell` это процент трейлинга в долях единицы, 3% => 0.03 
-* `ladder` - доступно только для `stopLoss`, трейлинг лесенкой
+Fields:
+* `price` - price buy/sell, if specified - it's MARKET order
+* `threshold` - threshold price for activation `action`, using how stop price for `action` (STOP MARKET/LIMIT orders)
+  * for `buys` mandatory only if `type` == `BuyIfAbove` || `BuyIfBelow`
+  * for `takeProfits` и `stopLoss`, always mandatory
+* `trailing` - available only for `takeProfits` и `stopLoss`
+  * для `stopLoss` c `type == StopLossTrailingSell` this is the relative difference between the stop loss level and the current market price, in fractions of a unit, a positive value
+  * для `takeProfits` с `type == TakeProfitTrailingSell` this is the percentage of trailing, 3% => 0.03
+* `ladder` - available for `stopLoss`
 
-Для buys
+For buys
 * type == `Buy`
-* type == `BuyIfAbove`, обязательно `threshold`
-* type == `BuyIfBelow`, обязательно `threshold`
+* type == `BuyIfAbove`, mandatory `threshold`
+* type == `BuyIfBelow`, mandatory `threshold`
 
-Для take profits
-* type == `TakeProfitSell`, обязательно `threshold`
-* type == `TakeProfitTrailingSell`, обязательно `threshold, trailing`
+For take profits
+* type == `TakeProfitSell`, mandatory `threshold`
+* type == `TakeProfitTrailingSell`, mandatory `threshold, trailing`
 
-Для stop loss
-* type == `StopLossSell`, обязательно `threshold`
-* type == `StopLossTrailingSell`, обязательно `trailing`
+For stop loss
+* type == `StopLossSell`, mandatory `threshold`
+* type == `StopLossTrailingSell`, mandatory `trailing`
 
 
 # 7. updateSignal(`signalId`)
-Редактирование сигнала
+Signal update
 
-> Обязательные поля 
+> Mandatory fields 
 * `signalId<str>`
 * `action`:
   * `amount<number>|<str>`
@@ -147,14 +147,14 @@ Request example into example file, here are details:
     * `'create'`
     * `'replace'`
     * `'remove'`
-      * При использовании этого типа в обьекте больше ничего передавать не надо
+      * Using this type of editMode, use just it in whole `action` object
 
-В `buys`, `takeProfits`, `stopLoss` надо передавать только то что подлежит изменению.
+In `buys`, `takeProfits`, `stopLoss` it is necessary to use only what is subject to change.
 
 
 # 8. panicSellSignal(`signalId`)
-Паник селл/Закрытие сигнала
+Panic Sell/Clsoe signal
 
-`signalId` Передается в `query`
+`signalId` in `query`
 
-По всем вопросам https://t.me/dobrijvecher
+All questions - https://t.me/dobrijvecher
