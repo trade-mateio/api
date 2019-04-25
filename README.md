@@ -77,7 +77,7 @@
 
 
 # 5. getSignal(`signalId`)
-Получение сигнал по `signalId`
+Получение сигнала по `signalId`
 
 `signalId` Передается в `query`
 
