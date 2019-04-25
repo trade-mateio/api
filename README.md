@@ -78,6 +78,7 @@
 
 # 5. getSignal(`signalId`)
 Получение сигнал по `signalId`
+`signalId` Передается в `query`
 
 
 # 6. makeSignal()
@@ -144,5 +145,6 @@
 
 # 8. panicSellSignal(`signalId`)
 Паник селл/Закрытие сигнала
+`signalId` Передается в `query`
 
 По всем вопросам https://t.me/dobrijvecher
