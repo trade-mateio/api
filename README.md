@@ -112,7 +112,7 @@ Request example into example file, here are details:
 ## In case of what this `action` is, it has different values:
 
 Fields:
-* `price` - price buy/sell, if specified - it's MARKET order
+* `price` - price buy/sell, if specified - it's LIMIT order, if it is not - MARKET
 * `threshold` - threshold price for activation `action`, using how stop price for `action` (STOP MARKET/LIMIT orders)
   * for `buys` mandatory only if `type` == `BuyIfAbove` || `BuyIfBelow`
   * for `takeProfits` и `stopLoss`, always mandatory
