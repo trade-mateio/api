@@ -29,9 +29,9 @@ Query of each request should have
 ### EXAMPLE authSignature
 1. queryParams `{ nonce: 14892427427, a: 1, b: 2 }`
 2. body `{ some_body: '2love' }`
-3. Resulted string with body -   
+3. Resulted string with body -
 `a:1:b:2:nonce:14892427427:{"some_body":"2love"}:rSfSzzNA97nNJSgc0aToSw==`
-4. Resulted string without body - 
+4. Resulted string without body -
 `a:1:b:2:nonce:14892427427::rSfSzzNA97nNJSgc0aToSw==`
 5. Use sha256 for resulted string and calculate digest in base64
 
@@ -46,7 +46,7 @@ Get statistics info for channel
 * `signalsLastDay` - number of created signals last day
 * `maxActiveSignalsPerFeed` - max active signals per channel
 * channel limits for `exchanges` and `base_currencies`. in limitRemaining field - 1 means 100%.
-  * At the time the signal is created, the limit on this exchange and the base_currency is reduced by the amount of volume in the signal; when the signal is closed, the limit volume involved in the signal returns to the limit.
+  * At the time when signal is created, the limit on this `exchange` and the `base_currency` is reduced by the amount of volume in the signal; when the signal is closed, the limit volume, involved in the signal, returns to the limit.
   ```javascript 
   {
       "exchanges":{
