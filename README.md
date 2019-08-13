@@ -70,6 +70,18 @@ Get list of exchanges
 
 # 3. getSymbols()
 Get list of symbols and it's `symbolId`
+* response:
+```javascript
+{
+   4 : {
+       currency: 'AE',
+       baseCurrency: 'BTC',
+       active: true,
+       rate: '0.00002370'
+   },
+   ...
+}
+```
 
 
 # 4. getSignals()
