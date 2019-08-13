@@ -82,6 +82,7 @@ Get list of symbols and it's `symbolId`
    ...
 }
 ```
+* Currencies should have `active : true` to be used in signals.
 
 
 # 4. getSignals()
