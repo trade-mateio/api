@@ -39,6 +39,7 @@ Query of each request should have
 
 # 1. getStats()
 > `GET https://trade-mate.io/api/bot/v1/stats?nonce=XXX`
+
 Get statistics info for channel
 * `score` - calculated score of the channel
 * `requestsPerMinute` - max requests limit per minute
@@ -67,11 +68,13 @@ Get statistics info for channel
 
 # 2. getExchanges()
 > `GET https://trade-mate.io/api/bot/v1/exchanges?nonce=XXX`
+
 Get list of exchanges
 
 
 # 3. getSymbols()
 > `GET https://trade-mate.io/api/bot/v1/symbols?nonce=XXX`
+
 Get list of symbols and it's `symbolId`
 * response:
 ```javascript
@@ -90,6 +93,7 @@ Get list of symbols and it's `symbolId`
 
 # 4. getSignals()
 > `GET https://trade-mate.io/api/bot/v1/signals?nonce=XXX`
+
 Get channel signals
 
 Available filters in query:
