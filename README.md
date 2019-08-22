@@ -164,7 +164,8 @@ For stop loss
 * type == `StopLossTrailingSell`, mandatory `trailing`
 
 > Example: 
-```javascript {
+```javascript 
+{
     symbolId: 487,
     buys: { 
        '1': { 
