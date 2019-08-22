@@ -163,6 +163,37 @@ For stop loss
 * type == `StopLossSell`, mandatory `threshold`
 * type == `StopLossTrailingSell`, mandatory `trailing`
 
+> Example: 
+```javascript {
+    symbolId: 487,
+    buys: { 
+       '1': { 
+           price: '0.00000472', 
+           type: 'Buy', 
+           amount: '0.1'
+       }
+    },
+    takeProfits: { 
+        '2': { 
+            amount: '0.05',
+            threshold: 0.000004956,
+            type: 'TakeProfitSell' 
+        },
+        '3': { 
+            amount: '0.05',
+            threshold: 0.0000051920000000000004,
+            trailing: 0.02,
+            type: 'TakeProfitTrailingSell' 
+        }
+    },
+    stopLoss: { 
+        amount: '0.1',
+        type: 'StopLossSell',
+        threshold: 0.000004484,
+        ladder: true
+    }
+}
+```
 
 # 7. updateSignal(`signalId`)
 > `PATCH https://trade-mate.io/api/bot/v1/signal?nonce=XXX&signalId=YYY`
