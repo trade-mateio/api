@@ -142,13 +142,13 @@ Request example into example file, here are details:
 
 Fields:
 * `price` - price buy/sell, if specified - it's LIMIT order, if it is not - MARKET
-* `threshold` - threshold price for activation `action`, using how stop price for `action` (STOP MARKET/LIMIT orders)
+* `threshold` - threshold price for activation `action`, using like stop price for `action` (STOP MARKET/LIMIT orders)
   * for `buys` mandatory only if `type` == `BuyIfAbove` || `BuyIfBelow`
   * for `takeProfits` и `stopLoss`, always mandatory
 * `trailing` - available only for `takeProfits` и `stopLoss`
   * для `stopLoss` c `type == StopLossTrailingSell` this is the relative difference between the stop loss level and the current market price, in fractions of a unit, a positive value
   * для `takeProfits` с `type == TakeProfitTrailingSell` this is the percentage of trailing, 3% => 0.03
-* `ladder` - available for `stopLoss`
+* `ladder<boolean>` - only for `stopLoss` and is mandatory
 
 For buys
 * type == `Buy`
