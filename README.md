@@ -158,7 +158,7 @@ Signal update
 * `buys`
 * `takeProfits`
 
-* in `action` should be `editMode` field:
+> in `action` should be `editMode` field:
   * `editMode<str>`:
     * `'create'` - if you add action
     * `'replace'` - if you change some in existing action
