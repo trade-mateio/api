@@ -152,17 +152,18 @@ For stop loss
 
 # 7. updateSignal(`signalId`)
 Signal update
+* `signalId<str>` in `query`
 
 > Mandatory fields 
-* `signalId<str>`
-* `action`:
-  * `amount<number>|<str>`
-  * `type<str>`
-  * `editMode<str>`
-    * `'create'`
-    * `'replace'`
-    * `'remove'`
-      * Using this type of editMode, use just it in whole `action` object
+* `buys`
+* `takeProfits`
+* `stopLoss`
+
+* in `action` should be `editMode` field:
+  * `editMode<str> options`
+    * `'create'` - if you add action
+    * `'replace'` - if you change some in existing action
+    * `'remove'` - if you removing action
 
 In `buys`, `takeProfits`, `stopLoss` it is necessary to use only what is subject to change.
 
