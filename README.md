@@ -38,6 +38,7 @@ Query of each request should have
 ### Requests in documentation example:
 
 # 1. getStats()
+> `GET https://trade-mate.io/api/bot/v1/stats?nonce=XXX`
 Get statistics info for channel
 * `score` - calculated score of the channel
 * `requestsPerMinute` - max requests limit per minute
@@ -65,10 +66,12 @@ Get statistics info for channel
   ```
 
 # 2. getExchanges()
+> `GET https://trade-mate.io/api/bot/v1/exchanges?nonce=XXX`
 Get list of exchanges
 
 
 # 3. getSymbols()
+> `GET https://trade-mate.io/api/bot/v1/symbols?nonce=XXX`
 Get list of symbols and it's `symbolId`
 * response:
 ```javascript
@@ -86,6 +89,7 @@ Get list of symbols and it's `symbolId`
 
 
 # 4. getSignals()
+> `GET https://trade-mate.io/api/bot/v1/signals?nonce=XXX`
 Get channel signals
 
 Available filters in query:
@@ -98,6 +102,8 @@ Available filters in query:
 
 
 # 5. getSignal(`signalId`)
+> `GET https://trade-mate.io/api/bot/v1/signal?nonce=XXX&signalId=YYY`
+
 Get signal with `signalId`
 
 `signalId` in `query`
@@ -107,6 +113,7 @@ Get signal with `signalId`
 > `POST https://trade-mate.io/api/bot/v1/signal?nonce=XXX`
 
 Signal create
+
 Request example into example file, here are details:
 
 > Signal is consists of `actions`, this actions has semantics like `buys`, `takeProfits`, `stopLoss`.
@@ -173,7 +180,9 @@ In `buys`, `takeProfits`, `stopLoss` it is necessary to use only what is subject
 
 
 # 8. panicSellSignal(`signalId`)
-Panic Sell/Clsoe signal
+> `POST https://trade-mate.io/api/bot/v1/panic?nonce=XXX&signalId=YYY`
+
+Panic Sell/Close signal
 
 `signalId` in `query`
 
