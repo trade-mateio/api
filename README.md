@@ -154,13 +154,12 @@ For stop loss
 Signal update
 * `signalId<str>` in `query`
 
-> Mandatory fields 
+> Mandatory fields are:
 * `buys`
 * `takeProfits`
-* `stopLoss`
 
 * in `action` should be `editMode` field:
-  * `editMode<str> options`
+  * `editMode<str>`:
     * `'create'` - if you add action
     * `'replace'` - if you change some in existing action
     * `'remove'` - if you removing action
