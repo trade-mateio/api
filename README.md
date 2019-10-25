@@ -163,6 +163,10 @@ For stop loss
 * type == `StopLossSell`, mandatory `threshold`
 * type == `StopLossTrailingSell`, mandatory `trailing`
 
+If you make a signal for a channel that supports BitMEX, you should send additional fields:
+* `leverage` : preferred from 1 to 5
+* `task_type` : `SHORT` || `LONG`
+
 > Example: 
 ```javascript 
 {
